@@ -10,8 +10,10 @@ export const ImageGenerator = () => {
         <div className="image"><img src={default_image} alt="" /></div>
 
       </div>
-      <div className="search-box"></div>
-
+      <div className="search-box">
+        <input type="text" className='search-input' placeholder='Describe the Image You Want' />
+        <div className="generate-btn">Generate</div>
+      </div>
     </div>
   )
 }

@@ -27,9 +27,30 @@
 .img-loading img {
   width: 512px;
 }
-
-.image img {
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
+.search-box {
+  display: flex;
+  width: 1000px;
+  height: 95px;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 50px;
+  background:#2B005A;
+ 
+  padding: 0 10px;
 }
+
+/* Style for the input inside the search box */
+.search-input {
+  width: 600px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  color: white;
+  padding-left: 35px;
+  margin-right: 35px;
+}
+
+
+
