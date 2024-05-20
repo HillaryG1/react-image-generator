@@ -1,0 +1,35 @@
+.ai-image-generator {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
+.header {
+  font-size: 70px;
+  font-weight: 500;
+  padding-bottom: 30px;
+}
+
+.header span {
+  color: #FFD700;
+  font-weight: 600;
+}
+
+.img-loading {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-loading img {
+  width: 512px;
+}
+
+.image img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
