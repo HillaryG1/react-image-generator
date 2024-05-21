@@ -1,51 +1,55 @@
-import React, { useRef, useState } from 'react'
-import './ImageGenerator.css'
-import default_image from '../Assets/default image.svg'
+import React, { useRef, useState } from 'react';
+import './ImageGenerator.css';
+import default_image from '../Assets/default image.svg';
 
 export const ImageGenerator = () => {
 
-  const [image_url, setImage_url] = useState("/")
-  let inputRef = useRef(null);
+  const [image_url, setImage_url] = useState("/");
+  const inputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const ImageGenerator = async () => {
-    if (inputRef.current.value==="") {
+    if (inputRef.current.value === "") {
       return 0;
     }
+    setLoading(true);
+    console.log("API key:", process.env.API_KEY); // Adding console.log to log the API key
+
     const response = await fetch(
       " https://api.openai.com/v1/images/generations",
       {
         method: "POST",
         headers: {
-            "Content-Type":"application/json",
-            Authorization:
-            `Bearer ${process.env.API_KEY}`,
-            "User-Agent":"Chrome",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.API_KEY}`,
+          "User-Agent": "Chrome",
         },
-        body:JSON.stringify({
+        body: JSON.stringify({
           prompt: `${inputRef.current.value}`,
-          n:1,
-          size:"512x512",
+          n: 1,
+          size: "512x512",
         }),
       }
     );
     let data = await response.json();
     let data_array = data.data;
     setImage_url(data_array[0].url);
-    console.log(data);
-  }
+    setLoading(false);
+  };
+
   return (
     <div className='ai-image-generator'>
       <div className="header">Ai image <span>generator</span></div>
       <div className='img-loading'>
-        <div className="image"><img src={image_url==="/"?default_image:image_url} alt="" /></div>
+        <div className="image"><img src={image_url === "/" ? default_image : image_url} alt="" /></div>
         <div className="loading">
-          <div className="loading-bar"></div>
+          <div className={loading?"loading-bar-full":"loading-bar"}></div>
+          <div className={loading?"loading-text":"display-none"}>Loading...</div>
         </div>
-
       </div>
       <div className="search-box">
         <input type="text" ref={inputRef} className='search-input' placeholder='Describe the Image You Want' />
-        <div className="generate-btn"  onClick={ImageGenerator}>Generate</div>
+        <div className="generate-btn" onClick={() => { ImageGenerator() }}>Generate</div>
       </div>
     </div>
   )
